@@ -25,7 +25,8 @@ $font-display: 'Josefin Sans', sans-serif;
 // for breakpoint widths, use "em's" because we use em for media queries
 $bp-largest: 75em; // 1200px/16px (default font size for browser)
 $bp-large: 62.5em; // 1000px/16px = 62.5em
-
+$bp-medium: 50em; // 800px/16px = 50em
+$bp-small: 37.5em; // 600/16
 // Global Settings
 *,
 *::before,
@@ -69,7 +70,7 @@ body {
     // 
     //             col-start - start of 1 column
     //             col-end - end of 1 column
-    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start]minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end]; // we usually 1100-1200px (1140/8 = 140px = 14rem)
+    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end]; // we usually 1100-1200px (1140/8 = 140px = 14rem)
     // minmax(min-content, 14rem): we want 8 columns with a minimum width of their content and max width of 140px
     // 8rem for sidebar
     // minmax(6rem, 1fr) ensures that the "buffer" columns between the 'homes' section and others never gets smaller than 6 rem 
@@ -86,6 +87,14 @@ body {
     // add row at the top 6*8px = 48px
     @media only screen and (max-width: $bp-large) {
         grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
-        grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start]minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+        grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+    }
+
+    // move columns ontop of each other (create new rows)
+    @media only screen and (max-width: $bp-medium) {
+        // can get rid of all "min-content min-content min-content repeat(3, min-content)" bc that's all we have to change;
+        // all we need to change is sidebar and header
+        // the reset is based on the content
+        grid-template-rows: 6rem calc(100vh - 6rem);
     }
 }

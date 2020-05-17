@@ -3,17 +3,38 @@
     grid-column: center-start / center-end;
     margin: 15rem 0;
 
-    display: grid;
     // grid-template-columns: repeat(3, 1fr);
     // make the grid-template-columns responsive without any media queries
     // reduce amt of columns whenever content doesn't fit anymore (250px can't be held anymore)
+    /*
+    display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     grid-gap: 6rem;
-    // grid-template-rows: auto auto; --> Don't need this
     align-items: start;
+    */
+    // grid-template-rows: auto auto; --> Don't need this
+
+    // check if browser supports CSS grid; if it does, use the supports. if not, use float styling
+    @supports (display: grid) {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+        grid-gap: 6rem;
+        align-items: start;
+    }
 }
 
 .feature {
+
+    // float styling if browser doesn't support grid
+    // float: left;
+    // width: 33.3333%;
+    // margin-bottom: 6rem;
+
+    // @supports(display: grid) {
+    //     width: auto;
+    //     margin-bottom: 0;
+    // }
+
     display: grid;
     grid-template-columns: min-content 1fr;
     grid-row-gap: 1.5rem;
