@@ -10,6 +10,66 @@ $color-grey-light-2: #aaa;
 $color-grey-dark-1: #54483A;
 $color-grey-dark-2: #6D5D4B;
 
+// Additional Scheme (https://coolors.co/cfdbd5-e8eddf-f5cb5c-242423-333533)
+$color-rich-1: #CFDBD5;
+$color-rich-2: #E8EDDF;
+$color-rich-3: #F5CB5C;
+$color-rich-4: #242423;
+$color-rich-5: #333533;
+
 // FONT VARIABLES
 $font-primary: 'Nunito', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
+
+// Global Settings
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px;
+}
+
+body {
+    font-family: $font-primary;
+    color: $color-grey-dark-2;
+    font-weight: 300;
+    line-height: 1.6;
+}
+
+.container {
+    display: grid;
+    // auto also means min-content (there will be enough space to fit the content)
+    // min-content means as much height/width as the content itself
+    grid-template-rows: 80vh min-content 40vw repeat(3, min-content);
+    // 8 column layout; perfect for full bleed sections
+    //      - columns are almost always more important than rows
+    // Naming of columns (name your column sections)
+    //             sidebar-start - start of sidebar
+    //             sidebar-end - end of sidebar
+    // 
+    //             center-start - start of section containing 8 columns in the center
+    //             center-end - end of section containing 8 columns in the center
+    // 
+    //             full-start - start of full bleed section
+    //             full-end - end of full bleed section
+    // 
+    //             col-start - start of 1 column
+    //             col-end - end of 1 column
+    grid-template-columns: [sidebar-start] 8rem [sidebar-end full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start]minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end]; // we usually 1100-1200px (1140/8 = 140px = 14rem)
+    // minmax(min-content, 14rem): we want 8 columns with a minimum width of their content and max width of 140px
+    // 8rem for sidebar
+    // minmax(6rem, 1fr) ensures that the "buffer" columns between the 'homes' section and others never gets smaller than 6 rem 
+    //      instead, the 'homes' and 'features' (columns between the buffer columns) shrink instead
+
+    // development for better visuals 
+    & > * {
+        padding: 40px;
+        font-size: 3rem;
+    }
+}
