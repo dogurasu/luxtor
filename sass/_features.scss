@@ -1,4 +1,36 @@
 .features {
-    background-color: $color-grey-light-2;
+    // background-color: $color-grey-light-2;
     grid-column: center-start / center-end;
+    margin: 15rem 0;
+
+    display: grid;
+    // grid-template-columns: repeat(3, 1fr);
+    // make the grid-template-columns responsive without any media queries
+    // reduce amt of columns whenever content doesn't fit anymore (250px can't be held anymore)
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+    grid-gap: 6rem;
+    // grid-template-rows: auto auto; --> Don't need this
+    align-items: start;
+}
+
+.feature {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    grid-row-gap: 1.5rem;
+    grid-column-gap: 2.5rem;
+    // don't have to define rows because we just want the height of each row to be the height of the content
+
+    &__icon {
+        fill: $color-primary;
+        width: 4.5rem;
+        height: 4.5rem;
+        // margin-right: 1rem;
+        grid-row: 1 / span 2; // -1 only works with explicit grid
+        transform: translateY(-1rem);
+    }
+
+    &__text {
+        font-size: 1.7rem;
+        // grid-column: 2 / 3; place into 4th section of feature grid
+    }
 }
