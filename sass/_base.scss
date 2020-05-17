@@ -21,6 +21,11 @@ $color-rich-5: #333533;
 $font-primary: 'Nunito', sans-serif;
 $font-display: 'Josefin Sans', sans-serif;
 
+// RESPONSIVE BREAKPOINTS
+// for breakpoint widths, use "em's" because we use em for media queries
+$bp-largest: 75em; // 1200px/16px (default font size for browser)
+$bp-large: 62.5em; // 1000px/16px = 62.5em
+
 // Global Settings
 *,
 *::before,
@@ -33,6 +38,9 @@ $font-display: 'Josefin Sans', sans-serif;
 html {
     box-sizing: border-box;
     font-size: 62.5%; // 10px/16px = 62.5% -> 1rem = 10px;
+    @media only screen and (max-width: $bp-largest) {
+        font-size: 50%; // 8px/16px = 50%;
+    }
 }
 
 body {
@@ -72,4 +80,12 @@ body {
     //     padding: 40px;
     //     font-size: 3rem;
     // }
+
+    // media query to change grid layout to change sidebar placement
+    // get rid of first column
+    // add row at the top 6*8px = 48px
+    @media only screen and (max-width: $bp-large) {
+        grid-template-rows: 6rem 80vh min-content 40vw repeat(3, min-content);
+        grid-template-columns: [full-start] minmax(6rem, 1fr) [center-start] repeat(8, [col-start]minmax(min-content, 14rem) [col-end]) [center-end] minmax(6rem, 1fr) [full-end];
+    }
 }
